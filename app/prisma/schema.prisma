@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model conditions {
+  time        DateTime @db.Timestamptz(6)
+  device_id   String
+  temperature Decimal? @db.Decimal
+  humidity    Decimal? @db.Decimal
+
+  @@id([time, device_id])
+  @@index([device_id, time])
+  @@index([time])
+}
+
+model locations {
+  device_id   String  @id
+  location    String?
+  environment String?
+}

@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS "locations";
 CREATE TABLE "locations"(
-    device_id    TEXT,
+    device_id    TEXT PRIMARY KEY,
     location     TEXT,
     environment  TEXT
 );
@@ -10,7 +10,8 @@ CREATE TABLE "conditions"(
     time         TIMESTAMP WITH TIME ZONE NOT NULL,
     device_id    TEXT,
     temperature  NUMERIC,
-    humidity     NUMERIC
+    humidity     NUMERIC,
+    PRIMARY KEY(time, device_id)
 );
 
 CREATE INDEX ON "conditions"(time DESC);
