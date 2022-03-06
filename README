@@ -1,7 +1,0 @@
-##Timescale + Remix Experiment
-
-Timescale weather sample data visualized in a Remix app.
-
-```
-docker-compose up
-```
