@@ -1,2 +1,2 @@
 .DS_Store
-db/docker-entrypoint-data.sh/*.csv
+db/docker-entrypoint-initdb.d/*.csv
