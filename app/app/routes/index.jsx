@@ -1,32 +1,30 @@
+// routes/index.js
+import { useLoaderData, Link } from 'remix'
+import  prisma from '~/lib/db.server'
+
+export const loader = async () => {
+  const data = {
+    locations: await prisma.locations.findMany(),
+  }
+  return data
+}
+
 export default function Index() {
+  const { locations } = useLoaderData()
+
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
-      <h1>Welcome to Remix</h1>
+    <>
+      <div>
+        <h1>Locations</h1>
+      </div>
       <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
+        {locations.map((location) => (
+          <li key={location.device_id}>
+            <h1>{location.location}</h1>
+            <p>{location.environment}</p>
+          </li>
+        ))}
       </ul>
-    </div>
-  );
+    </>
+  )
 }

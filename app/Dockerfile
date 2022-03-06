@@ -1,7 +1,9 @@
-FROM node:16-alpine
+# Can't use Alpine on M1 until new binaries are available
+FROM node:16
 WORKDIR /usr/server/app
-
 COPY ./package.json ./
-RUN npm install
+RUN yarn
 COPY ./ .
-CMD npm run dev
+# Reinstall Prisma client to generate needed files
+RUN yarn add @prisma/client
+CMD yarn run dev

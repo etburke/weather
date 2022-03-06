@@ -2,3 +2,5 @@ node_modules
 npm-debug.log
 .gitignore
 README.md
+build
+.cache

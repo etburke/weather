@@ -12,11 +12,15 @@ services:
 
   app:
     build: ./app
+    restart: always
     ports:
         - 3000:3000
+        - 8002:8002
     volumes:
         - ./app:/usr/server/app
         - nodemodules:/usr/server/app/node_modules
+        - dotprisma:/usr/server/app/node_modules/.prisma
+        - atprisma:/usr/server/app/node_modules/@prisma
     links:
         - db
     depends_on: 
@@ -24,3 +28,5 @@ services:
 
 volumes:
     nodemodules: {}
+    dotprisma: {}
+    atprisma: {}
