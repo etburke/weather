@@ -1,0 +1,26 @@
+# Use postgres/example user/password credentials
+version: '3.1'
+
+services:
+
+  db:
+    build: ./db
+    environment:
+      POSTGRES_PASSWORD: example
+    ports:
+        - 5432:5432
+
+  app:
+    build: ./app
+    ports:
+        - 3000:3000
+    volumes:
+        - ./app:/usr/server/app
+        - nodemodules:/usr/server/app/node_modules
+    links:
+        - db
+    depends_on: 
+        - db
+
+volumes:
+    nodemodules: {}
